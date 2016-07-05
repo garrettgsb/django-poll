@@ -1,12 +1,57 @@
 {% load staticfiles %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+<link rel="stylesheet" href="{% static 'polls/mdl/material.min.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
-{% if latest_question_list %}
-  <ul>
-    {% for question in latest_question_list %}
-      <li><a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a></li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>No polls are available</p>
-{% endif %}
+<script src="{% static 'polls/jquery-3.0.0.js' %}"></script>
+<script src="{% static 'polls/mdl/material.min.js' %}"></script>
+<script src="{% static 'polls/script.js' %}"></script>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">Django Poll - <small>A poll tutorial for perfectionists with deadlines</small></span>
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+        <a href="#" class="mdl-navigation__link">Polls Home</a>
+        <a href="#" class="mdl-navigation__link">New Poll</a>
+        <a href="#" class="mdl-navigation__link">Just Reddit</a>
+      </nav>
+    </div>
+  </header>
+  <main class="mdl-layout__content">
+    <header>
+      <h2 style="margin-left: 20px;">All Polls</h2>
+    </header>
+    <section class="page-content mdl-color--white">
+      {% if latest_question_list %}
+        <ul class="mdl-list">
+          {% for question in latest_question_list %}
+            <li class="mdl-list__item">
+              <span class="mdl-list__item-primary-content">
+                <i class="material-icons">question_answer</i>
+                <span style="width:10px;"></span>
+                <a class="mdl-list__item-primary-content" href="{% url 'polls:detail' question.id %}">
+                  <span style="min-width: 300px;">
+                    {{question.question_text}}
+                  </span>
+              </span>
+                <span style="width:20px;"></span>
+                <button class="
+                  mdl-button
+                  mdl-js-button
+                  mdl-js-ripple-effect
+                  mdl-button--raised">
+                  View
+                </button>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No polls are available</p>
+      {% endif %}
+    </content>
+  </main>
+</div>

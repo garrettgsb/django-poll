@@ -1,7 +1,17 @@
 body {
-  background: #DDDDDD url('images/background.png') no-repeat;
+  background: #DDDDDD
 }
 
 li a {
   color: green;
+}
+
+nav ul li a {
+  color: red;
+  text-decoration: none;
+  list-style: none;
+}
+
+.content-em {
+  background: white;
 }
