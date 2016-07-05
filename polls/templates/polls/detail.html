@@ -1,0 +1,31 @@
+<h1>{{ question }}</h1>
+
+{% if error_message %}<p><strong>{{error_message}}</strong></p>{% endif %}
+
+<p>
+  <em>
+    So this is not really the place for this, but that's what the tutorial said to do.
+  </em>
+</p>
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+  <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}" />
+  <label for="choice{{forloop.counter}}">{{choice.choice_text}}</label><br />
+  {% endfor %}
+  <input type="submit" value="Vote" />
+</form>
+
+
+<h2>Details:</h2>
+<ul>
+  <li>Question ID: {{ question.id }}</li>
+  <li>Publish Date: {{ question.pub_date }}</li>
+</ul>
+
+<h2>Question Choices:</h2>
+<ul>
+  {% for choice in question.choice_set.all %}
+  <li>{{ choice.choice_text }}</li>
+  {% endfor %}
+</ul>
